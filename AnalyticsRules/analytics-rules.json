@@ -1,12 +1,11 @@
 {
-  "analytics": [
+  "Scheduled": [
     {
-      "kind": "Scheduled",
       "displayName": "AlertRule01",
       "description": "",
       "severity": "Medium",
       "enabled": true,
-      "query": "SecurityEvent | where EventID == \"4687\" | where CommandLine contains \"-noni -ep bypass $\"",
+      "query": "SecurityEvent | where EventID == \"4688\" | where CommandLine contains \"-noni -ep bypass $\"",
       "queryFrequency": "4H",
       "queryPeriod": "6H",
       "triggerOperator": "GreaterThan",
@@ -35,7 +34,6 @@
       }
     },
     {
-      "kind": "Scheduled",
       "displayName": "AlertRule02",
       "description": "",
       "severity": "Medium",
@@ -53,21 +51,24 @@
         "Collection"
       ],
       "playbookName": ""
-    },
+    }
+  ],
+  "Fusion": [
     {
-      "kind": "Fusion",
       "displayName": "Advanced Multistage Attack Detection",
       "enabled": true,
       "alertRuleTemplateName": "f71aba3d-28fb-450b-b192-4e76a83015c8"
-    },
+    }
+  ],
+  "MLBehaviorAnalytics": [
     {
-      "kind": "MLBehaviorAnalytics",
       "displayName": "(Preview) Anomalous SSH Login Detection",
       "enabled": true,
       "alertRuleTemplateName": "fa118b98-de46-4e94-87f9-8e6d5060b60b"
-    },
+    }
+  ],
+  "MicrosoftSecurityIncidentCreation": [
     {
-      "kind": "MicrosoftSecurityIncidentCreation",
       "displayName": "Create incidents based on Azure Active Directory Identity Protection alerts",
       "description": "Create incidents based on all alerts generated in Azure Active Directory Identity Protection",
       "enabled": true,
