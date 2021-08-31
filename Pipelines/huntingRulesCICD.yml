@@ -56,7 +56,7 @@ stages:
       - task: AzurePowerShell@4
         displayName: 'Create and Update Hunting Rules'
         inputs:
-         azureSubscription: 'SUBSCRIPTION_NAME_HERE'
+         azureSubscription: $(azureSubscription)
          ScriptPath: '$(Pipeline.Workspace)/Scripts/Scripts/CreateHuntingRulesAPI.ps1'
          ScriptArguments: '-Workspace $(Workspace) -RulesFile hunting-rules.json'
          azurePowerShellVersion: LatestVersion

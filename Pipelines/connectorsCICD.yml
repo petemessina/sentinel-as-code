@@ -54,7 +54,7 @@ stages:
       - task: AzurePowerShell@4
         displayName: 'Create and Update Connectors'
         inputs:
-         azureSubscription: 'SUBSCRIPTION_NAME_HERE'
+         azureSubscription: $(azureSubscription)
          ScriptPath: '$(Pipeline.Workspace)/Scripts/Scripts/EnableConnectorsAPI.ps1'
          ScriptArguments: '-TenantId $(TenantId) -ClientId $(ClientId) -ClientSecret $(ClientSecret) -SubscriptionId $(SubscriptionId) -ResourceGroup $(ResourceGroup) -Workspace $(Workspace) -ConnectorsFile connectors.json'
          azurePowerShellVersion: LatestVersion

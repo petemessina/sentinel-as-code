@@ -57,7 +57,7 @@ stages:
       - task: AzurePowerShell@4
         displayName: 'Create and Update Playbooks'
         inputs:
-         azureSubscription: 'SUBSCRIPTION_NAME_HERE'
+         azureSubscription: $(azureSubscription)
          ScriptPath: '$(Pipeline.Workspace)/Scripts/Scripts/CreatePlaybooks.ps1'
          ScriptArguments: '-resourceGroup $(ResourceGroup) -PlaybooksFolder $(Pipeline.Workspace)/Playbooks'
          azurePowerShellVersion: LatestVersion

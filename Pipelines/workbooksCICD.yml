@@ -57,7 +57,7 @@ stages:
       - task: AzurePowerShell@4
         displayName: 'Create and Update Workbooks'
         inputs:
-         azureSubscription: 'SUBSCRIPTION_NAME_HERE'
+         azureSubscription: $(azureSubscription)
          ScriptPath: '$(Pipeline.Workspace)/Scripts/Scripts/CreateWorkbooks.ps1'
          ScriptArguments: '-SubscriptionId $(SubscriptionId) -ResourceGroup $(ResourceGroup) -Workspace $(Workspace) -WorkbooksFolder $(Pipeline.Workspace)/Workbooks'
          azurePowerShellVersion: LatestVersion
