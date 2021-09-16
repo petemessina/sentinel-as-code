@@ -1,0 +1,68 @@
+trigger:
+ paths:
+   include:
+     - AnalyticsRules/*
+     - Connectors/*
+     - HuntingRules/*
+     
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- task: Files-Validator@1
+  displayName: 'Validate File Structure'
+  inputs:
+    rootDir: '$(Pipeline.Workspace)/*.json'
+    validateXML: false
+    validateJSON: true
+    validateYAML: false
+    validatePS: false
+
+- task: PowerShell@2
+  displayName: 'Execute tests'
+  inputs:
+    targetType: 'inline'
+    script: 'Invoke-Pester *.tests.ps1 -OutputFile ./test-results.xml -OutputFormat NUnitXml'
+    errorActionPreference: 'continue'
+    pwsh: true
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results'
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**/test-results.xml'
+    failTaskOnFailedTests: true
+
+- task: CopyFiles@2
+  displayName: 'Copy Alert Rules'
+  inputs:
+    contents: "**/*.json"
+    SourceFolder: AnalyticsRules
+    TargetFolder: '$(Pipeline.Workspace)/AnalyticsRules'
+
+- task: CopyFiles@2
+  displayName: 'Copy Hunting Rules'
+  inputs:
+    contents: "**/*.json"
+    SourceFolder: HuntingRules
+    TargetFolder: '$(Pipeline.Workspace)/HuntingRules'
+
+- task: CopyFiles@2
+  displayName: 'Copy Connectors'
+  inputs:
+    contents: "**/*.json"
+    SourceFolder: Connectors
+    TargetFolder: '$(Pipeline.Workspace)/Connectors'
+
+- task: CopyFiles@2
+  displayName: 'Copy Scripts'
+  inputs:
+    contents: "**/*.release.ps1"
+    SourceFolder: Scripts
+    TargetFolder: '$(Pipeline.Workspace)/Scripts'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: ProcessFiles'
+  inputs:
+    PathtoPublish: '$(Pipeline.Workspace)'
+    ArtifactName: SentinelFiles
