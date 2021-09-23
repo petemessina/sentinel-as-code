@@ -1,20 +1,13 @@
 {
-    "connectors": [
-    {
-        "kind": "AzureSecurityCenter",
-        "properties": {
-            "subscriptionId": "subscriptionId",
-            "dataTypes": {
-                "alerts": {
-                    "state": "Enabled"
-                }
-            }
-        }
-    },
-    {
-        "kind": "AzureActivityLog",
-        "properties": {
-            "linkedResourceId": "/subscriptions/subscriptionId/providers/microsoft.insights/eventtypes/management"
-        }
-    }]
-}
+    "AzureSecurityCenter": [
+      {
+        "subscriptionId": "__SUBSCRIPTIONID__",
+        "state": "Enabled"
+      }
+    ],
+    "AzureActivityLog": [
+      {
+        "subscriptionId": "__SUBSCRIPTIONID__"
+      }
+    ]
+  }
